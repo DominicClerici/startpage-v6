@@ -1,0 +1,35 @@
+.dialogContent[data-state="open"] {
+  animation: slideFadeInFromRight 0.25s ease-out;
+}
+.dialogContent[data-state="closed"] {
+  animation: slideFadeOutToRight 0.15s ease-in;
+}
+.overlayAnimate[data-state="open"] {
+  animation: fadeIn 0.2s ease-out;
+}
+.overlayAnimate[data-state="closed"] {
+  animation: fadeOut 0.1s ease-in;
+}
+.gearSpin {
+  animation: spin 0.75s ease-out;
+}
+.moveLeft[data-state="active"] {
+  animation: tabSlideFromLeft 150ms linear backwards;
+}
+.moveLeft[data-state="inactive"] {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  animation: tabSlideToLeft 150ms linear forwards;
+}
+.moveRight[data-state="active"] {
+  animation: tabSlideFromRight 150ms linear backwards;
+}
+.moveRight[data-state="inactive"] {
+  top: 0;
+  right: 0;
+  position: absolute;
+  width: 100%;
+  animation: tabSlideToRight 150ms linear forwards;
+}

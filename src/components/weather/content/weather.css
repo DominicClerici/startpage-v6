@@ -1,0 +1,10 @@
+.weatherContentTab[data-state="active"] {
+  animation: expandFadeIn 0.5s 0.5s ease-in-out backwards;
+}
+.weatherContentTab[data-state="inactive"] {
+  top: 0;
+  right: 0;
+  position: absolute;
+  width: 100%;
+  animation: shrinkFadeOut 0.5s ease-in-out;
+}

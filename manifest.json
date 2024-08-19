@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Spring Tab - New Tab",
+  "description": "A customizable, fast, and beautiful new tab page for Chrome.",
+  "version": "1.0",
+  "chrome_url_overrides": {
+    "newtab": "./dist/index.html",
+    "homepage": "./dist/index.html"
+  },
+  "icons": {
+    "128": "favicon-chrome.png"
+  },
+  "host_permissions": ["http://localhost:3001/*"],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' http://localhost:3001 https://api.spotify.com https://api.lifx.com;"
+  },
+  "permissions": ["storage", "history", "identity"]
+}

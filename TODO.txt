@@ -1,0 +1,3 @@
+Tonight: 
+ - Spotify api integration: Player
+ - Lifx api integration: presets, control lights, see what is possible

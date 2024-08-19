@@ -1,0 +1,53 @@
+#Line_1.playing {
+  animation: barPulse 1s infinite both;
+  animation-delay: calc(1 * 0.15s);
+}
+#Line_2.playing {
+  animation: barPulse 1s infinite both;
+  animation-delay: calc(2 * 0.15s);
+}
+#Line_3.playing {
+  animation: barPulse 1s infinite both;
+  animation-delay: calc(3 * 0.15s);
+}
+#Line_4.playing {
+  animation: barPulse 1s infinite both;
+  animation-delay: calc(4 * 0.15s);
+}
+#Line_5.playing {
+  animation: barPulse 1s infinite both;
+  animation-delay: calc(5 * 0.15s);
+}
+#Line_6.playing {
+  animation: barPulse 1s infinite both;
+  animation-delay: calc(6 * 0.15s);
+}
+#Line_7.playing {
+  animation: barPulse 1s infinite both;
+  animation-delay: calc(7 * 0.15s);
+}
+#Line_8.playing {
+  animation: barPulse 1s infinite both;
+  animation-delay: calc(8 * 0.15s);
+}
+#Line_9.playing {
+  animation: barPulse 1s infinite both;
+  animation-delay: calc(9 * 0.15s);
+}
+
+@keyframes barPulse {
+  0% {
+    transform: scaleY(1);
+    transform-origin: 50% 50%;
+  }
+
+  50% {
+    transform: scaleY(0.5);
+    transform-origin: 50% 50%;
+  }
+
+  100% {
+    transform: scaleY(1);
+    transform-origin: 50% 50%;
+  }
+}

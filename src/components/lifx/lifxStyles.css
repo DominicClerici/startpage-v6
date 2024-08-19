@@ -1,0 +1,94 @@
+:root {
+  --hue: 0;
+  --saturation: 100%;
+  --brightness: 50%;
+  --kelvin-color: hsl(0, 5%, 100%);
+  --kelvin-brightness: 100%;
+}
+
+.customSlider {
+  margin-top: 0 !important;
+  appearance: none;
+  cursor: pointer;
+  writing-mode: vertical-lr;
+  direction: rtl;
+  margin-top: 10px;
+  height: 200px;
+  background: transparent;
+  width: 30px;
+}
+.customSlider::-webkit-slider-runnable-track {
+  width: 100%;
+  border: 0;
+  border-radius: 30px;
+}
+.customSlider::-webkit-slider-thumb {
+  appearance: none;
+  transform: scale(1.2);
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  border: solid 2px hsl(var(--border));
+  cursor: pointer;
+}
+.brightnessBg::-webkit-slider-runnable-track {
+  background: linear-gradient(
+    to top,
+    hsl(var(--hue), var(--saturation), 5%),
+    hsl(var(--hue), var(--saturation), 25%),
+    hsl(var(--hue), var(--saturation), 50%)
+  );
+}
+.hueSlider::-webkit-slider-runnable-track {
+  background: linear-gradient(
+    to top,
+    hsl(0, var(--saturation), var(--brightness)),
+    hsl(60, var(--saturation), var(--brightness)),
+    hsl(120, var(--saturation), var(--brightness)),
+    hsl(180, var(--saturation), var(--brightness)),
+    hsl(240, var(--saturation), var(--brightness)),
+    hsl(300, var(--saturation), var(--brightness)),
+    hsl(360, var(--saturation), var(--brightness))
+  );
+}
+.hueSlider::-webkit-slider-thumb {
+  background-color: hsl(var(--hue), var(--saturation), 50%);
+}
+.saturationSlider::-webkit-slider-runnable-track {
+  background: linear-gradient(to top, hsl(var(--hue), 5%, var(--brightness)), hsl(var(--hue), 100%, var(--brightness)));
+}
+.saturationSlider::-webkit-slider-thumb {
+  background-color: hsl(var(--hue), var(--saturation), 50%);
+}
+.brightnessKelvinSlider::-webkit-slider-runnable-track {
+  background: linear-gradient(to top, hsl(0, 0%, 5%), var(--kelvin-color));
+}
+.brightnessKelvinSlider::-webkit-slider-thumb {
+  background-color: var(--kelvin-color);
+  filter: brightness(var(--kelvin-brightness));
+}
+.kelvinSlider::-webkit-slider-runnable-track {
+  background: linear-gradient(
+    to top,
+    hsl(21, 100%, 50%),
+    hsl(25, 100%, 50%),
+    hsl(33, 100%, 64%),
+    hsl(36, 100%, 71%),
+    hsl(38, 100%, 77%),
+    hsl(40, 100%, 82%),
+    hsl(42, 100%, 86%),
+    hsl(43, 100%, 90%),
+    hsl(44, 100%, 92%),
+    hsl(45, 100%, 95%),
+    hsl(180, 100%, 99%),
+    hsl(240, 100%, 98%),
+    hsl(240, 100%, 96%),
+    hsl(240, 100%, 94%),
+    hsl(240, 100%, 93%),
+    hsl(240, 100%, 92%)
+  );
+  filter: brightness(var(--kelvin-brightness));
+}
+.kelvinSlider::-webkit-slider-thumb {
+  background-color: var(--kelvin-color);
+}

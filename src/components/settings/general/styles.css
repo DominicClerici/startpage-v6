@@ -1,0 +1,19 @@
+.accordionTrigger[data-state="open"] .accordionTick1 {
+  d: path("M45 9L45 80");
+}
+.accordionTrigger[data-state="open"] .accordionTick2 {
+  d: path("M45 160L45 80");
+}
+
+.accordionContent {
+  overflow: hidden;
+  font-size: 15px;
+  color: var(--mauve-11);
+  background-color: var(--mauve-2);
+}
+.accordionContent[data-state="open"] {
+  animation: accordionExpand 250ms cubic-bezier(0.87, 0, 0.13, 1);
+}
+.accordionContent[data-state="closed"] {
+  animation: accordionShrink 250ms cubic-bezier(0.87, 0, 0.13, 1);
+}
