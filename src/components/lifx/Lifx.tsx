@@ -1,260 +1,9 @@
-import { LightbulbIcon } from "lucide-react"
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react"
-import AnimateUnmount from "../lib/AnimateUnmount"
 import Content from "./Content"
 import { LifxApiKeyContext, LifxEnabledContext, LifxRecentColorsContext } from "@/context/integrations/Lifx"
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
 
-// code 429 is rate limit, 60 sec wait time
-
-const exampleData = [
-  {
-    id: "d073d572f1e4",
-    uuid: "a69610d1-32ee-47ca-bc5d-65c564ef0eba",
-    label: "Apt",
-    connected: false,
-    power: "on",
-    color: {
-      hue: 284,
-      saturation: 0,
-      kelvin: 3500,
-    },
-    brightness: 1,
-    group: {
-      id: "26e796393c7c720f0d9dd2f9ffec00f1",
-      name: "Bedroom",
-    },
-    location: {
-      id: "b1c48de79596993931d72580ca820114",
-      name: "Room",
-    },
-    product: {
-      name: "LIFX Color",
-      identifier: "lifx_color",
-      company: "LIFX",
-      vendor_id: 1,
-      product_id: 91,
-      capabilities: {
-        has_color: true,
-        has_variable_color_temp: true,
-        has_ir: false,
-        has_hev: false,
-        has_chain: false,
-        has_matrix: false,
-        has_multizone: false,
-        min_kelvin: 1500,
-        max_kelvin: 9000,
-      },
-    },
-    last_seen: "2024-08-19T00:32:59Z",
-    seconds_since_seen: 0,
-  },
-  {
-    id: "d073d572fa23",
-    uuid: "a140a95f-6a96-416e-88ee-c58ae31981de",
-    label: "Other",
-    connected: true,
-    power: "on",
-    color: {
-      hue: 41.75,
-      saturation: 0,
-      kelvin: 3500,
-    },
-    brightness: 1,
-    group: {
-      id: "26e796393c7c720f0d9dd2f9ffec00f1",
-      name: "Bedroom",
-    },
-    location: {
-      id: "b1c48de79596993931d72580ca820114",
-      name: "Room",
-    },
-    product: {
-      name: "LIFX Color",
-      identifier: "lifx_color",
-      company: "LIFX",
-      vendor_id: 1,
-      product_id: 91,
-      capabilities: {
-        has_color: true,
-        has_variable_color_temp: true,
-        has_ir: false,
-        has_hev: false,
-        has_chain: false,
-        has_matrix: false,
-        has_multizone: false,
-        min_kelvin: 1500,
-        max_kelvin: 9000,
-      },
-    },
-    last_seen: "2024-08-19T00:32:59Z",
-    seconds_since_seen: 0,
-  },
-  {
-    id: "d073d572f1e4",
-    uuid: "a69610d1-32ee-47ca-bc5d-65c564ef0eba",
-    label: "Apt",
-    connected: false,
-    power: "on",
-    color: {
-      hue: 284,
-      saturation: 0,
-      kelvin: 3500,
-    },
-    brightness: 1,
-    group: {
-      id: "26e796393c7c720f0d9dd2f9ffec00f1",
-      name: "Bedroom",
-    },
-    location: {
-      id: "b1c48de79596993931d72580ca820114",
-      name: "Room",
-    },
-    product: {
-      name: "LIFX Color",
-      identifier: "lifx_color",
-      company: "LIFX",
-      vendor_id: 1,
-      product_id: 91,
-      capabilities: {
-        has_color: true,
-        has_variable_color_temp: true,
-        has_ir: false,
-        has_hev: false,
-        has_chain: false,
-        has_matrix: false,
-        has_multizone: false,
-        min_kelvin: 1500,
-        max_kelvin: 9000,
-      },
-    },
-    last_seen: "2024-08-19T00:32:59Z",
-    seconds_since_seen: 0,
-  },
-  {
-    id: "d073d572fa23",
-    uuid: "a140a95f-6a96-416e-88ee-c58ae31981de",
-    label: "Other",
-    connected: true,
-    power: "on",
-    color: {
-      hue: 41.75,
-      saturation: 0,
-      kelvin: 3500,
-    },
-    brightness: 1,
-    group: {
-      id: "26e796393c7c720f0d9dd2f9ffec00f1",
-      name: "Bedroom",
-    },
-    location: {
-      id: "b1c48de79596993931d72580ca820114",
-      name: "Room",
-    },
-    product: {
-      name: "LIFX Color",
-      identifier: "lifx_color",
-      company: "LIFX",
-      vendor_id: 1,
-      product_id: 91,
-      capabilities: {
-        has_color: true,
-        has_variable_color_temp: true,
-        has_ir: false,
-        has_hev: false,
-        has_chain: false,
-        has_matrix: false,
-        has_multizone: false,
-        min_kelvin: 1500,
-        max_kelvin: 9000,
-      },
-    },
-    last_seen: "2024-08-19T00:32:59Z",
-    seconds_since_seen: 0,
-  },
-  {
-    id: "d073d572f1e4",
-    uuid: "a69610d1-32ee-47ca-bc5d-65c564ef0eba",
-    label: "Apt",
-    connected: false,
-    power: "on",
-    color: {
-      hue: 284,
-      saturation: 0,
-      kelvin: 3500,
-    },
-    brightness: 1,
-    group: {
-      id: "26e796393c7c720f0d9dd2f9ffec00f1",
-      name: "Bedroom",
-    },
-    location: {
-      id: "b1c48de79596993931d72580ca820114",
-      name: "Room",
-    },
-    product: {
-      name: "LIFX Color",
-      identifier: "lifx_color",
-      company: "LIFX",
-      vendor_id: 1,
-      product_id: 91,
-      capabilities: {
-        has_color: true,
-        has_variable_color_temp: true,
-        has_ir: false,
-        has_hev: false,
-        has_chain: false,
-        has_matrix: false,
-        has_multizone: false,
-        min_kelvin: 1500,
-        max_kelvin: 9000,
-      },
-    },
-    last_seen: "2024-08-19T00:32:59Z",
-    seconds_since_seen: 0,
-  },
-  {
-    id: "d073d572fa23",
-    uuid: "a140a95f-6a96-416e-88ee-c58ae31981de",
-    label: "Other",
-    connected: true,
-    power: "on",
-    color: {
-      hue: 41.75,
-      saturation: 0,
-      kelvin: 3500,
-    },
-    brightness: 1,
-    group: {
-      id: "26e796393c7c720f0d9dd2f9ffec00f1",
-      name: "Bedroom",
-    },
-    location: {
-      id: "b1c48de79596993931d72580ca820114",
-      name: "Room",
-    },
-    product: {
-      name: "LIFX Color",
-      identifier: "lifx_color",
-      company: "LIFX",
-      vendor_id: 1,
-      product_id: 91,
-      capabilities: {
-        has_color: true,
-        has_variable_color_temp: true,
-        has_ir: false,
-        has_hev: false,
-        has_chain: false,
-        has_matrix: false,
-        has_multizone: false,
-        min_kelvin: 1500,
-        max_kelvin: 9000,
-      },
-    },
-    last_seen: "2024-08-19T00:32:59Z",
-    seconds_since_seen: 0,
-  },
-]
+// code 429 is rate limit, 60 sec wait time, 401 is wrong key
 
 const LightBulbIcon = ({ isActive, isOpen }: { isActive: boolean; isOpen: boolean }) => {
   return (
@@ -288,6 +37,7 @@ export const LifxMain = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [lightData, setLightData] = useState<LightData[] | null>(null)
   const [rateLimit, setRateLimit] = useState(false)
+  const [badKey, setBadKey] = useState(false)
   const { lifxRecentColors, setLifxRecentColors } = useContext(LifxRecentColorsContext)
   const { lifxEnabled } = useContext(LifxEnabledContext)
   const { lifxApiKey } = useContext(LifxApiKeyContext)
@@ -321,7 +71,11 @@ export const LifxMain = () => {
     if (res.status === 429) {
       isUpdatingColor.current = false
       setRateLimit(true)
-      console.log("rate limit")
+      return 1
+    }
+    if (res.status === 401) {
+      isUpdatingColor.current = false
+      setBadKey(true)
       return 1
     }
     if (res.status === 207) {
@@ -401,6 +155,10 @@ export const LifxMain = () => {
       headers: requestHeaders,
       body: JSON.stringify({ duration: 0.5 }),
     })
+    if (res.status === 401) {
+      setBadKey(true)
+      return 1
+    }
     if (res.status === 429) {
       setRateLimit(true)
       return 1
@@ -434,6 +192,10 @@ export const LifxMain = () => {
       setRateLimit(true)
       return
     }
+    if (res.status === 401) {
+      setBadKey(true)
+      return 1
+    }
     const data = await res.json()
     // const data = exampleData
     if (data.length === 0) {
@@ -456,18 +218,20 @@ export const LifxMain = () => {
   }
 
   useEffect(() => {
-    if (rateLimit) return
+    if (rateLimit || badKey) return
     const interval = setInterval(() => {
       getLightData()
     }, 5000)
     getLightData()
     return () => clearInterval(interval)
-  }, [lifxEnabled, lifxApiKey, rateLimit])
+  }, [lifxEnabled, lifxApiKey, rateLimit, badKey])
 
   if (!lifxEnabled) return null
   if (!lightData) return null
   return (
-    <LifxDataContext.Provider value={{ lightData, setLightData, togglePower, setRateLimit, rateLimit, updateColor }}>
+    <LifxDataContext.Provider
+      value={{ lightData, setLightData, togglePower, setRateLimit, badKey, rateLimit, updateColor }}
+    >
       <Popover onOpenChange={setIsOpen}>
         <PopoverTrigger
           className={`${isOpen ? "text-foreground" : "text-muted-foreground hover:text-foreground"} group cursor-pointer rounded-lg p-2 transition-colors`}
