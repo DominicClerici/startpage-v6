@@ -1,5 +1,6 @@
-const AUTH_ENDPOINT = "http://localhost:3001/login"
-const REFRESH_ENDPOINT = "http://localhost:3001/refresh_token"
+const AUTH_ENDPOINT = "https://www.usespringtab.com/api/login"
+const REFRESH_ENDPOINT = "https://www.usespringtab.com/api/refresh_token"
+const API_ORIGIN = "https://www.usespringtab.com"
 
 export const loginUrl = AUTH_ENDPOINT
 
@@ -43,7 +44,7 @@ export const initiateSpotifyLogin = (): void => {
   }
 
   const handleMessage = (event: MessageEvent) => {
-    if (event.origin !== "http://localhost:3001") {
+    if (event.origin !== API_ORIGIN) {
       console.error("Invalid origin:", event.origin)
       return
     }

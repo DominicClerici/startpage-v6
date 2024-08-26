@@ -10,9 +10,13 @@
   "icons": {
     "128": "favicon-chrome.png"
   },
-  "host_permissions": ["http://localhost:3001/*"],
+  "host_permissions": [
+    "https://www.usespringtab.com/api/login",
+    "https://www.usespringtab.com/api/callback",
+    "https://www.usespringtab.com/api/refresh_token"
+  ],
   "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' http://localhost:3001 https://api.spotify.com https://api.lifx.com;"
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' https://www.usespringtab.com https://api.spotify.com https://api.lifx.com;"
   },
   "permissions": ["storage", "history", "identity"]
 }

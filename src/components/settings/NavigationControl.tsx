@@ -11,7 +11,7 @@ const className = {
 }
 
 export default function NavigationControl() {
-  const [currentTab, setCurrentTab] = useState("int")
+  const [currentTab, setCurrentTab] = useState("gen")
   const [isSwitchingLeft, setIsSwitchingLeft] = useState(false)
   const tabSlider = useRef(null)
   const handleTabChange = (e) => {
