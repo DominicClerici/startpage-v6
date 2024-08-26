@@ -10,20 +10,7 @@ import { restrictToVerticalAxis, restrictToParentElement } from "@dnd-kit/modifi
 import { DndContext, closestCenter, useSensor, useSensors, PointerSensor } from "@dnd-kit/core"
 import { arrayMove, SortableContext, useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import EditShortcut from "./EditShortcut"
 
 export default function ShortcutEditor() {
@@ -119,8 +106,8 @@ const SortableShortcutItem = ({ shortcut }: ShortcutItemProps) => {
 
   return (
     <div ref={setNodeRef} style={style} {...attributes} className={`grid cursor-default grid-cols-3 p-1`}>
-      <span>{shortcut.name}</span>
-      <span>{shortcut.url}</span>
+      <span className="line-clamp-2 w-36 overflow-hidden">{shortcut.name}</span>
+      <span className="line-clamp-1 w-48 max-w-48 overflow-hidden">{shortcut.url}</span>
       <span className="flex justify-end gap-1">
         <Button {...listeners} variant="ghost" size="icon">
           <ListOrdered className="h-4 w-4" />

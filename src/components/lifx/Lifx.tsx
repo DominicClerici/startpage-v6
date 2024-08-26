@@ -256,9 +256,36 @@ const exampleData = [
   },
 ]
 
+const LightBulbIcon = ({ isActive, isOpen }: { isActive: boolean; isOpen: boolean }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinejoin="round"
+      strokeLinecap="round"
+      className={`h-12 w-12 transition-transform ${isOpen ? "translate-y-0 scale-100" : "translate-y-3 scale-[60%] group-hover:translate-y-1 group-hover:scale-[70%]"}`}
+    >
+      <circle
+        cx="12"
+        cy="8"
+        r={isActive ? "3.5" : "0"}
+        strokeWidth="0"
+        fill="currentColor"
+        className="transition-all"
+      />
+      <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+      <path d="M9 18h6" />
+      <path d="M10 22h4" />
+    </svg>
+  )
+}
+
 export const LifxDataContext = createContext(null)
 export const LifxMain = () => {
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
   const [lightData, setLightData] = useState<LightData[] | null>(null)
   const [rateLimit, setRateLimit] = useState(false)
   const { lifxRecentColors, setLifxRecentColors } = useContext(LifxRecentColorsContext)
@@ -429,20 +456,23 @@ export const LifxMain = () => {
   }
 
   useEffect(() => {
+    if (rateLimit) return
+    const interval = setInterval(() => {
+      getLightData()
+    }, 5000)
     getLightData()
-  }, [lifxEnabled, lifxApiKey])
+    return () => clearInterval(interval)
+  }, [lifxEnabled, lifxApiKey, rateLimit])
 
   if (!lifxEnabled) return null
   if (!lightData) return null
   return (
     <LifxDataContext.Provider value={{ lightData, setLightData, togglePower, setRateLimit, rateLimit, updateColor }}>
-      <Popover defaultOpen={true} onOpenChange={setIsOpen}>
+      <Popover onOpenChange={setIsOpen}>
         <PopoverTrigger
           className={`${isOpen ? "text-foreground" : "text-muted-foreground hover:text-foreground"} group cursor-pointer rounded-lg p-2 transition-colors`}
         >
-          <LightbulbIcon
-            className={`h-12 w-12 transition-transform ${isOpen ? "translate-y-0 scale-100" : "translate-y-3 scale-[60%] group-hover:translate-y-1 group-hover:scale-[70%]"}`}
-          />
+          <LightBulbIcon isActive={lightData.some((light) => light.isOn)} isOpen={isOpen} />
         </PopoverTrigger>
         {/* content */}
         <PopoverContent

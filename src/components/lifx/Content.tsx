@@ -175,7 +175,14 @@ const ViewNavigationControl = () => {
         </div>
       )
     } else if (view.startsWith("id:")) {
-      return <IndivLight id={view.slice(3)} />
+      return (
+        <IndivLight
+          back={() => {
+            setView(null)
+          }}
+          id={view.slice(3)}
+        />
+      )
     } else if (view.startsWith("location:")) {
       const location = locations.find((location) => location.id === view.slice(9))
       console.log(location)

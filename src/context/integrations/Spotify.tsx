@@ -2,7 +2,7 @@ import useChromeStorage from "@/hooks/useChromeStorage"
 import { createContext } from "react"
 
 export const SpotifyEnabledContext = createContext(null)
-const spotifyEnabledDefault = true
+const spotifyEnabledDefault = false
 const SpotifyEnabledProvider = ({ children }) => {
   const [spotifyEnabled, setSpotifyEnabled] = useChromeStorage("spotifyEnabled", spotifyEnabledDefault)
   return (

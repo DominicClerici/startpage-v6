@@ -1,4 +1,4 @@
-import { DropletIcon, LightbulbOff, PowerIcon, Rainbow, SunIcon, ThermometerIcon } from "lucide-react"
+import { ChevronLeft, DropletIcon, LightbulbOff, PowerIcon, Rainbow, SunIcon, ThermometerIcon } from "lucide-react"
 import { LifxDataContext, LightData } from "./Lifx"
 import { useContext, useEffect, useRef, useState } from "react"
 import "./lifxStyles.css"
@@ -7,7 +7,7 @@ import { LifxRecentColorsContext } from "@/context/integrations/Lifx"
 import { Separator } from "../ui/separator"
 import { kelvin_table } from "./kelvinTable"
 
-export default function IndivLight({ id }: { id: string }) {
+export default function IndivLight({ id, back }: { id: string; back?: () => void }) {
   const { lightData, togglePower, updateColor } = useContext(LifxDataContext)
   const { lifxRecentColors } = useContext(LifxRecentColorsContext)
   const [isKelvin, setIsKelvin] = useState(lightData.find((light) => light.id === id).color.saturation === 0)
@@ -41,9 +41,18 @@ export default function IndivLight({ id }: { id: string }) {
         </div>
       ) : null}
       <span className="flex items-center justify-between">
-        <span>
-          <h1 className="text-2xl font-bold leading-5">{thisLightData.name}</h1>
-          {thisLightData.group ? <p className="font-light text-muted-foreground">{thisLightData.group.name}</p> : null}
+        <span className="flex items-center gap-2">
+          {back && (
+            <Button onClick={back} variant="ghost" size="icon" className="w-6">
+              <ChevronLeft className="h-6 w-6" />
+            </Button>
+          )}
+          <span>
+            <h1 className="text-2xl font-bold leading-5">{thisLightData.name}</h1>
+            {thisLightData.group ? (
+              <p className="font-light text-muted-foreground">{thisLightData.group.name}</p>
+            ) : null}
+          </span>
         </span>
         <button
           onClick={() => {

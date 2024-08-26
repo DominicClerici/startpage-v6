@@ -1,4 +1,3 @@
-import Toggle from "../controls/Toggle"
 import ShortcutEditor from "./ShortcutEditor"
 import ViewSelector from "./ViewSelector"
 
