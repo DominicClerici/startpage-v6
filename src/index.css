@@ -103,7 +103,7 @@ body {
 }
 :root.light {
   --bg: 250 250 250;
-  --bg-higher: 240 240 240;
+  --bg-higher: 240 240 2 40;
   --bg-highest: 220 220 220;
   --surface: 200 200 200;
   --main: 20 20 20;
