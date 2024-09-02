@@ -40,10 +40,10 @@ export default function LayoutController() {
             </ConnectionWrapper>
             <Todos />
             <ConnectionWrapper fallback={<p>Offline</p>}>
-              <Weather />
+              <SpotifyAuthController />
             </ConnectionWrapper>
             <ConnectionWrapper fallback={<p>Offline</p>}>
-              <SpotifyAuthController />
+              <Weather />
             </ConnectionWrapper>
           </div>
           <MainClock />

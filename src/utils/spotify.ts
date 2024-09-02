@@ -1,6 +1,6 @@
-const API_ORIGIN = "https://usespringtab.com"
-const AUTH_ENDPOINT = `${API_ORIGIN}/spotify/api/login`
-const REFRESH_ENDPOINT = `${API_ORIGIN}/spotify/api/refresh_token`
+const API_ORIGIN = "https://www.usespringtab.com"
+const AUTH_ENDPOINT = `${API_ORIGIN}/api/spotify/login`
+const REFRESH_ENDPOINT = `${API_ORIGIN}/api/spotify/refresh_token`
 
 export const loginUrl = AUTH_ENDPOINT
 

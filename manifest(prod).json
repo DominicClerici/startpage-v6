@@ -4,8 +4,8 @@
   "description": "A customizable, fast, and beautiful new tab page for Chrome.",
   "version": "1.0",
   "chrome_url_overrides": {
-    "newtab": "./dist/index.html",
-    "homepage": "./dist/index.html"
+    "newtab": "./index.html",
+    "homepage": "./index.html"
   },
   "icons": {
     "128": "favicon-chrome.png"

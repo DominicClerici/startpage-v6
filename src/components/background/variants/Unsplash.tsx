@@ -9,7 +9,15 @@ export default function Unsplash() {
   return (
     <div className="fixed inset-0 -z-10 h-screen w-screen">
       {unsplashBackground.blurhash && (
-        <Blurhash className="opacity" hash={unsplashBackground.blurhash} width={"100%"} height={"100%"} />
+        <Blurhash
+          style={{
+            filter: `brightness(${100 - unsplashBackgroundFilters.darken}%)`,
+          }}
+          className="opacity"
+          hash={unsplashBackground.blurhash}
+          width={"100%"}
+          height={"100%"}
+        />
       )}
       <img
         style={{
