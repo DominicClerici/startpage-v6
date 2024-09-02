@@ -218,6 +218,7 @@ export const LifxMain = () => {
   }
 
   useEffect(() => {
+    if (!lifxEnabled) return
     if (rateLimit || badKey) return
     const interval = setInterval(() => {
       getLightData()

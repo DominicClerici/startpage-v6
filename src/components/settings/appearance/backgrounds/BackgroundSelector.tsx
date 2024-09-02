@@ -13,6 +13,8 @@ import {
 import AuraSettings from "./AuraSettings"
 import SolidSettings from "./SolidSettings"
 import AnimateUnmount from "@/components/lib/AnimateUnmount"
+import Unsplash from "./unsplash/Unsplash"
+import Filters from "./unsplash/Filters"
 
 export default function BackgroundSelector() {
   const { backgroundMode, setBackgroundMode } = useContext(BackgroundMode)
@@ -31,6 +33,8 @@ export default function BackgroundSelector() {
               <SelectLabel>Colors</SelectLabel>
               <SelectItem value="solid">Solid</SelectItem>
               <SelectItem value="aura">Aura</SelectItem>
+              <SelectLabel>Photo</SelectLabel>
+              <SelectItem value="unsplash">Unsplash</SelectItem>
             </SelectGroup>
             <SelectSeparator />
             <SelectGroup>
@@ -38,10 +42,7 @@ export default function BackgroundSelector() {
               <SelectItem disabled value="upload">
                 Upload
               </SelectItem>
-              <SelectItem disabled value="unsplash">
-                Unsplash
-              </SelectItem>
-              <SelectItem disabled value="unsplash">
+              <SelectItem disabled value="dotMatrix">
                 Dot Matrix
               </SelectItem>
             </SelectGroup>
@@ -53,6 +54,10 @@ export default function BackgroundSelector() {
       </AnimateUnmount>
       <AnimateUnmount closeDuration="0ms" active={backgroundMode === "solid"}>
         <SolidSettings />
+      </AnimateUnmount>
+      <AnimateUnmount closeDuration="0ms" active={backgroundMode === "unsplash"}>
+        <Filters />
+        <Unsplash />
       </AnimateUnmount>
     </>
   )

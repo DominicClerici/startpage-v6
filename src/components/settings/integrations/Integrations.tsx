@@ -30,7 +30,7 @@ export const LifxIcon = ({ className }: { className: string }) => (
 
 export default function Integrations() {
   return (
-    <Accordion type="multiple" defaultValue={["lifx"]}>
+    <Accordion type="multiple">
       <AccordionItem value="spotify">
         <AccordionTrigger>
           <span className="flex items-center gap-2">

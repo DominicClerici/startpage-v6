@@ -82,7 +82,6 @@ export default function SpotifyMain({ token }: { token: string }) {
     }
     fetchCurrentTrack()
     const interval = setInterval(fetchCurrentTrack, 5000) // Update every 5 seconds
-
     return () => clearInterval(interval)
   }, [token, currentTrack?.id])
 
@@ -129,16 +128,17 @@ export default function SpotifyMain({ token }: { token: string }) {
       return <div>No track currently playing</div>
     }
 
-    const className = {
-      buttonIcon: "h-6 w-6 transition-transform scale-90 group-hover:scale-100 group-active:scale-90 duration-75",
-    }
     console.log(currentTrack)
     return (
       <div>
         <span className="mb-2 flex items-center justify-between gap-2">
-          <AnimatedIcon isPlaying={isPlaying} />
-          <a href={"d"} className="group flex items-center gap-2 text-2xl font-light text-muted-foreground">
-            Playing on <SpotifyIcon className="h-6 w-6 fill-[#1ED760]" />{" "}
+          <AnimatedIcon isPlaying={true} />
+          <a
+            href={currentTrack.external_urls.spotify}
+            target="_blank"
+            className="group flex items-center gap-2 text-2xl font-light text-muted-foreground"
+          >
+            <SpotifyIcon className="h-6 w-6 fill-[#1ED760]" />{" "}
             <ChevronRight className="h-4 w-4 -translate-x-1 transition-transform group-hover:translate-x-0" />
           </a>
         </span>
@@ -161,7 +161,7 @@ export default function SpotifyMain({ token }: { token: string }) {
             variant="outline"
             className="group flex-grow text-muted-foreground hover:text-foreground"
           >
-            <SkipBackIcon className={className.buttonIcon} />
+            <SkipBackIcon className="h-6 w-6 scale-90 transition-transform duration-75 group-hover:scale-100 group-active:scale-90" />
           </Button>
           <Button
             disabled={isFetching}
@@ -169,7 +169,11 @@ export default function SpotifyMain({ token }: { token: string }) {
             className="group flex-grow text-muted-foreground hover:text-foreground"
             onClick={handlePlayPause}
           >
-            {isPlaying ? <PauseIcon className={className.buttonIcon} /> : <PlayIcon className={className.buttonIcon} />}
+            {isPlaying ? (
+              <PauseIcon className="h-6 w-6 scale-90 transition-transform duration-75 group-hover:scale-100 group-active:scale-90" />
+            ) : (
+              <PlayIcon className="h-6 w-6 scale-90 transition-transform duration-75 group-hover:scale-100 group-active:scale-90" />
+            )}
           </Button>
           <Button
             disabled={isFetching}
@@ -177,7 +181,7 @@ export default function SpotifyMain({ token }: { token: string }) {
             variant="outline"
             className="group flex-grow text-muted-foreground hover:text-foreground"
           >
-            <SkipForwardIcon className={className.buttonIcon} />
+            <SkipForwardIcon className="h-6 w-6 scale-90 transition-transform duration-75 group-hover:scale-100 group-active:scale-90" />
           </Button>
         </div>
       </div>

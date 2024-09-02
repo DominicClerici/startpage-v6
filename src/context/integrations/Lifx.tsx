@@ -2,7 +2,7 @@ import useChromeStorage from "@/hooks/useChromeStorage"
 import { createContext } from "react"
 
 export const LifxEnabledContext = createContext(null)
-const lifxEnabledDefault = false
+const lifxEnabledDefault = true
 const LifxEnabledProvider = ({ children }) => {
   const [lifxEnabled, setLifxEnabled] = useChromeStorage("lifxEnabled", lifxEnabledDefault)
   return <LifxEnabledContext.Provider value={{ lifxEnabled, setLifxEnabled }}>{children}</LifxEnabledContext.Provider>
@@ -11,7 +11,7 @@ const LifxEnabledProvider = ({ children }) => {
 export const LifxApiKeyContext = createContext(null)
 // c554cf4ba4a6ce826406378aec94b47fe838bd09b1aeed03604021b6e53d663c
 
-const lifxApiKeyDefault = ""
+const lifxApiKeyDefault = "c554cf4ba4a6ce826406378aec94b47fe838bd09b1aeed03604021b6e53d663c"
 const LifxApiKeyProvider = ({ children }) => {
   const [lifxApiKey, setLifxApiKey] = useChromeStorage("lifxApiKey", lifxApiKeyDefault)
   return <LifxApiKeyContext.Provider value={{ lifxApiKey, setLifxApiKey }}>{children}</LifxApiKeyContext.Provider>
