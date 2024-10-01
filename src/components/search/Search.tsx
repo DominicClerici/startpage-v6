@@ -47,35 +47,6 @@ export default function Search() {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Enter") {
-        if (!isOpen) {
-          setIsOpen(true)
-          inputRef.current.focus()
-          e.stopPropagation()
-        }
-      } else if (e.key === "Escape") {
-        setIsOpen(false)
-        inputRef.current.blur()
-      }
-    }
-    document.addEventListener("keydown", handleKeyDown)
-    return () => document.removeEventListener("keydown", handleKeyDown)
-  }, [isOpen])
-
-  let shortcutResults = []
-  let historyResults = []
-  if (searchValue.trim() !== "") {
-    shortcutResults = fuzzysort
-      .go(searchValue, shortcuts, { limit: 3, keys: ["name", "url"] })
-      .map((result) => result.obj)
-    historyResults = fuzzysort
-      .go(searchValue, historyRef.current, { limit: 3, keys: ["name", "url"] })
-      .map((result) => result.obj)
-  }
-
-  // use arrow keys to navigate through results using highlighted index state
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
       if (highlightedIndex >= shortcutResults.length + historyResults.length + 1) {
         setHighlightedIndex(shortcutResults.length + historyResults.length)
       }
@@ -90,9 +61,16 @@ export default function Search() {
         }
         setHighlightedIndex(newVal)
       } else if (e.key === "Enter") {
-        if (isOpen) {
+        if (!isOpen) {
+          setIsOpen(true)
+          inputRef.current.focus()
+          e.stopPropagation()
+        } else {
           if (highlightedIndex === 0) {
             // add 1 to useCount of shortcut
+            if (searchValue.trim() === "") {
+              return
+            }
             window.open(`https://www.google.com/search?q=${searchValue}`)
           } else if (highlightedIndex <= shortcutResults.length) {
             const selected = shortcuts.find((shortcut) => shortcut.id === shortcutResults[highlightedIndex - 1].id)
@@ -102,11 +80,25 @@ export default function Search() {
             window.open(historyResults[highlightedIndex - shortcutResults.length - 1].url)
           }
         }
+      } else if (e.key === "Escape") {
+        setIsOpen(false)
+        inputRef.current.blur()
       }
     }
     document.addEventListener("keydown", handleKeyDown)
     return () => document.removeEventListener("keydown", handleKeyDown)
-  }, [searchValue, highlightedIndex])
+  }, [isOpen, highlightedIndex, searchValue])
+
+  let shortcutResults = []
+  let historyResults = []
+  if (searchValue.trim() !== "") {
+    shortcutResults = fuzzysort
+      .go(searchValue, shortcuts, { limit: 3, keys: ["name", "url"] })
+      .map((result) => result.obj)
+    historyResults = fuzzysort
+      .go(searchValue, historyRef.current, { limit: 3, keys: ["name", "url"] })
+      .map((result) => result.obj)
+  }
 
   return (
     <div className="relative z-0 mt-4" ref={searchContainerRef}>

@@ -6,7 +6,12 @@
   font-family: "Instrument Sans";
   font-style: normal;
   font-display: swap;
-  src: url("./fonts/instrument.ttf") format("ttf");
+  /* src: url("./fonts/instrument.ttf") format("ttf"); */
+  src: url("/fonts/instrument.ttf") format("ttf");
+}
+
+body {
+  font-family: "Instrument Sans", sans-serif;
 }
 
 @layer base {

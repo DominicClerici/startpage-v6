@@ -7,6 +7,7 @@ function App() {
   return (
     <MainProvider>
       <main>
+        {/* <Updater /> */}
         <Background />
         <LayoutController />
       </main>

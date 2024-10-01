@@ -2,7 +2,7 @@ import { DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog
 import { Input } from "@/components/ui/input"
 import { shortcutsContext } from "@/context/shortcuts/Shortcuts"
 import fuzzysort from "fuzzysort"
-import { useContext, useState } from "react"
+import { Fragment, useContext, useState } from "react"
 import ImageDisplay from "../ImageDisplay"
 
 type Shortcut = {
@@ -34,19 +34,22 @@ export const AllShortcuts = () => {
         />
       </DialogHeader>
       <div className="grid grid-cols-6 gap-4">
-        {results.map((shortcut: Shortcut) => (
-          <a
-            tabIndex={0}
-            href={shortcut.url}
-            target="_blank"
-            onClick={() => addOneToUseCount(shortcut.id)}
-            className="group flex cursor-pointer flex-col items-center gap-1 rounded p-1 transition-colors duration-75 hover:bg-foreground/10"
-          >
-            <ImageDisplay className="h-8 w-8 rounded" url={shortcut.url} />
-            <span className="line-clamp-2 max-w-20 text-center text-sm text-muted-foreground transition-colors duration-75 group-hover:text-foreground">
-              {shortcut.name}
-            </span>
-          </a>
+        {results.map((shortcut: Shortcut, i: number) => (
+          <Fragment key={shortcut.id}>
+            <a
+              key={shortcut.id}
+              tabIndex={0}
+              href={shortcut.url}
+              target="_blank"
+              onClick={() => addOneToUseCount(shortcut.id)}
+              className="group flex h-min w-32 basis-1/6 cursor-pointer flex-col items-center gap-1 rounded py-3 transition-colors duration-75 hover:bg-foreground/10"
+            >
+              <ImageDisplay className="h-8 w-8 rounded" url={shortcut.url} />
+              <span className="line-clamp-2 max-w-20 text-center text-sm text-muted-foreground transition-colors duration-75 group-hover:text-foreground">
+                {shortcut.name}
+              </span>
+            </a>
+          </Fragment>
         ))}
       </div>
     </DialogContent>

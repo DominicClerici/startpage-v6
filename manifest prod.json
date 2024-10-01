@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Spring Tab - New Tab",
   "description": "A customizable, fast, and beautiful new tab page for Chrome.",
-  "version": "1.0",
+  "version": "1.002",
   "chrome_url_overrides": {
     "newtab": "./index.html",
     "homepage": "./index.html"

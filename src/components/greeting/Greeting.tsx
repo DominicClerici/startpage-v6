@@ -33,6 +33,10 @@ export default function Greeting() {
   const { options } = useContext(MantraOptionsContext)
   const { firstName } = useContext(FirstNameContext)
 
+  if (!firstName) {
+    return <p className="text-3xl font-medium text-muted-foreground">Add your name in settings</p>
+  }
+
   let string = ""
   if (showGreeting) {
     if (customGreeting.trim() !== "") {

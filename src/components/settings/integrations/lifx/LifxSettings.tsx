@@ -2,6 +2,8 @@ import { LifxApiKeyContext, LifxEnabledContext } from "@/context/integrations/Li
 import Toggle from "../../controls/Toggle"
 import { useContext, useRef, useState } from "react"
 import { Input } from "@/components/ui/input"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Button } from "@/components/ui/button"
 
 export default function LifxSettings() {
   const { lifxEnabled } = useContext(LifxEnabledContext)
@@ -45,10 +47,40 @@ export default function LifxSettings() {
       >
         <div className="grid grid-cols-3 items-center">
           <div className="col-span-2">
-            <h2 className="text-lg">LIFX Api key</h2>
-            <h3 className="text-muted-foreground">What is this</h3>
+            <h2 className="text-lg">LIFX API key</h2>
+            <Popover>
+              <PopoverTrigger>
+                <h3 className="text-muted-foreground underline hover:text-foreground">What is this?</h3>
+              </PopoverTrigger>
+              <PopoverContent>
+                <h1>LIFX API Key</h1>
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center gap-1">
+                    <p className="text-lg">1.</p>
+                    <a href="https://cloud.lifx.com/sign_in">
+                      <Button variant="outline">Sign into LIFX API</Button>
+                    </a>
+                  </div>
+                  <div className="flex items-start gap-1">
+                    <p className="text-lg">2.</p>
+                    <p className="text-muted-foreground">
+                      In the top right of the page, navigate to{" "}
+                      <span className="text-foreground">Personal access tokens</span>
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-1">
+                    <p className="text-lg">3.</p>
+                    <p className="text-muted-foreground">
+                      Click <span className="text-foreground">Generate new token</span>, then copy and paste the token
+                      into the field in Spring Tab.
+                    </p>
+                  </div>
+                </div>
+              </PopoverContent>
+            </Popover>
             {apiError && <p className="text-red-500">That key is not valid</p>}
           </div>
+
           <Input onBlur={handleChangeKey} ref={inputRef} placeholder="ABC123" defaultValue={lifxApiKey}></Input>
         </div>
       </div>

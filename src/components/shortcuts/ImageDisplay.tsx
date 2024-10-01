@@ -1,5 +1,3 @@
-import ConnectionWrapper from "@/ConnectionWrapper"
-
 export default function ImageDisplay({ url, className }: { url: string; className?: string }) {
   const handleCantLoad = (e) => {
     e.target.src = "./Icons/externalLink.png"

@@ -212,7 +212,7 @@ const ImageBlurHashPreview = ({ hash, alt, url }: { hash: string; alt: string; u
 
   return (
     <>
-      {hash && <Blurhash className="opacity" hash={hash} width={"100%"} height={"100%"} />}
+      {hash && <Blurhash hash={hash} width={"100%"} height={"100%"} />}
       <img
         src={url}
         alt={alt}

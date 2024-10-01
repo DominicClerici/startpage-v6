@@ -1,15 +1,34 @@
 import useChromeStorage from "@/hooks/useChromeStorage"
 import { createContext } from "react"
 
-export const displayModeContext = createContext(null)
-const displayModeDefault = "shown" // "shown" or "hidden" or "suggested"
+type ShortcutDisplayModes = "shown" | "hidden" | "suggested"
+
+interface DisplayModeContextType {
+  displayMode: ShortcutDisplayModes
+  setDisplayMode: (mode: ShortcutDisplayModes) => void
+}
+export const displayModeContext = createContext<DisplayModeContextType | null>(null)
+const displayModeDefault = "shown" as ShortcutDisplayModes
 const DisplayModeProvider = ({ children }) => {
   const [displayMode, setDisplayMode] = useChromeStorage("gridDisplayMode", displayModeDefault)
   return <displayModeContext.Provider value={{ displayMode, setDisplayMode }}>{children}</displayModeContext.Provider>
 }
 
-export const shortcutsContext = createContext(null)
-const shortcutsDefault = [
+export interface ShortcutType {
+  name: string
+  url: string
+  id: string
+  useCount: number
+}
+
+interface ShortcutsContextType {
+  shortcuts: ShortcutType[]
+  setShortcuts: (shortcuts: ShortcutType[]) => void
+  addOneToUseCount: (id: string) => void
+}
+
+export const shortcutsContext = createContext<ShortcutsContextType | null>(null)
+const shortcutsDefault: ShortcutType[] = [
   { name: "Portfolio", url: "https://www.dominicclerici.com", id: "10", useCount: 0 },
   { name: "StackOverflow", url: "https://stackoverflow.com", id: "1", useCount: 0 },
   { name: "GitHub", url: "https://github.com", id: "2", useCount: 0 },

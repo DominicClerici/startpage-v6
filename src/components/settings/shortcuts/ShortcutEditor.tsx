@@ -2,7 +2,7 @@ import AnimateUnmount from "@/components/lib/AnimateUnmount"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { shortcutsContext } from "@/context/shortcuts/Shortcuts"
-import { ListOrdered, PencilLine, PlusIcon, TrashIcon } from "lucide-react"
+import { InfoIcon, ListOrdered, PencilLine, PlusIcon, TrashIcon } from "lucide-react"
 import { useContext, useEffect, useState } from "react"
 import CreateShortcut from "./CreateShortcut"
 import { restrictToVerticalAxis, restrictToParentElement } from "@dnd-kit/modifiers"
@@ -39,6 +39,7 @@ export default function ShortcutEditor() {
     const { active, over } = event
 
     if (active.id !== over.id) {
+      // @ts-ignore
       setShortcuts((items) => {
         const oldIndex = items.findIndex((item) => item.id === active.id)
         const newIndex = items.findIndex((item) => item.id === over.id)
@@ -56,8 +57,8 @@ export default function ShortcutEditor() {
       onDragEnd={handleDragEnd}
     >
       <Card>
-        <CardHeader className="space-y-0">
-          <span className="flex flex-row items-start justify-between">
+        <CardHeader className="space-y-0 pt-4">
+          <span className="flex flex-row items-center justify-between">
             <CardTitle>Shortcuts</CardTitle>
             <span className="mt-0 flex flex-row items-center gap-1">
               <Button variant="outline" className="items-center gap-2" onClick={() => setIsCreating(!isCreating)}>
@@ -72,6 +73,11 @@ export default function ShortcutEditor() {
         </CardHeader>
         <CardContent>
           <SortableContext items={shortcuts} strategy={verticalListSortingStrategy}>
+            {shortcuts.length === 0 && (
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <InfoIcon className="h-6 w-6" /> <span>No shortcuts yet</span>
+              </div>
+            )}
             {shortcuts.map((shortcut) => (
               <SortableShortcutItem key={shortcut.id} shortcut={shortcut} />
             ))}
@@ -105,7 +111,12 @@ const SortableShortcutItem = ({ shortcut }: ShortcutItemProps) => {
   }
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} className={`grid cursor-default grid-cols-3 p-1`}>
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      className={`grid cursor-default grid-cols-3 items-center p-1 ring-border/50 hover:ring`}
+    >
       <span className="line-clamp-2 w-36 overflow-hidden">{shortcut.name}</span>
       <span className="line-clamp-1 w-48 max-w-48 overflow-hidden">{shortcut.url}</span>
       <span className="flex justify-end gap-1">

@@ -15,7 +15,7 @@ const AutomaticDarkModeProvider = ({ children }) => {
 }
 
 export const BackgroundMode = createContext(null)
-const BackgroundModeDefault = "unsplash" // can be "solid", "gradient", "unsplash", "aura",
+const BackgroundModeDefault = "aura" // can be "solid", "gradient", "unsplash", "aura",
 export const BackgroundModeProvider = ({ children }) => {
   const [backgroundMode, setBackgroundMode] = useChromeStorage("backgroundMode", BackgroundModeDefault)
   return <BackgroundMode.Provider value={{ backgroundMode, setBackgroundMode }}>{children}</BackgroundMode.Provider>
