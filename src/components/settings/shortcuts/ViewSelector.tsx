@@ -1,6 +1,6 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { displayModeContext } from "@/context/shortcuts/Shortcuts"
-import { LayoutGridIcon, LightbulbIcon, XCircle } from "lucide-react"
+import { LayoutGridIcon, LightbulbIcon } from "lucide-react"
 import { useContext } from "react"
 
 export default function ViewSelector() {
@@ -22,12 +22,6 @@ export default function ViewSelector() {
             <span className="flex items-center gap-2">
               <LightbulbIcon className="h-4 w-4" />
               Suggested
-            </span>
-          </SelectItem>
-          <SelectItem value="hidden">
-            <span className="flex items-center gap-2">
-              <XCircle className="h-4 w-4" />
-              Hidden
             </span>
           </SelectItem>
         </SelectContent>

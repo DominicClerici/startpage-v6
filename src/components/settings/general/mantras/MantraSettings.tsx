@@ -3,6 +3,7 @@ import { MantraEnabledContext } from "../../../../context/general/GreetingContex
 import Toggle from "../../controls/Toggle"
 import MantraFrequency from "./MantraFrequency"
 import MantrasUsed from "./MantrasUsed"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 
 export default function MantraSettings() {
   const { mantraEnabled } = useContext(MantraEnabledContext)
@@ -10,8 +11,13 @@ export default function MantraSettings() {
     <div className="flex flex-col gap-4">
       <label htmlFor="clockFormat" className="flex items-center justify-between">
         <span>
-          <h2 className="text-lg text-white/90">Show mantras</h2>
-          <h3 className="text-white/60">Show a mantra instead of a greeting</h3>
+          <h2 className="text-lg text-white/90">
+            Show mantras
+            <Tooltip delayDuration={0}>
+              <TooltipTrigger>?</TooltipTrigger>
+              <TooltipContent>Show a mantra instead of a greeting</TooltipContent>
+            </Tooltip>
+          </h2>
         </span>
         <Toggle htmlFor="clockFormat" ctx={MantraEnabledContext} />
       </label>

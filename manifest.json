@@ -17,5 +17,6 @@
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' https://www.usespringtab.com https://api.open-meteo.com https://api.spotify.com https://api.lifx.com;"
   },
-  "permissions": ["storage", "history"]
+
+  "permissions": ["storage", "history", "bookmarks"]
 }

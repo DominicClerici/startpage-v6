@@ -106,12 +106,13 @@ export default function Weather() {
   }
 
   const fetchPreviewData = async () => {
-    if (weatherLocation.name === "auto") {
+    if (weatherLocation.id === "auto") {
       if ("navigator" in window) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
             setWeatherLocation({
               name: "auto",
+              id: "auto",
               lat: position.coords.latitude,
               lon: position.coords.longitude,
             })
@@ -165,6 +166,8 @@ export default function Weather() {
     }
     return formattedData
   }
+
+  console.log(fullState)
 
   return (
     <Popover onOpenChange={handleToggle}>

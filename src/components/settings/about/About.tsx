@@ -1,0 +1,41 @@
+const SpringTabSVG = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16" viewBox="0 0 400 400" fill="none">
+      <rect width="400" height="400" rx="53" fill="#303030" />
+      <path
+        d="M51 99.7623C138.585 125.523 194.228 342.425 120.038 342.425C45.8479 342.425 88.095 78.6388 155.072 78.6388C222.049 78.6388 301.391 342.425 227.201 342.425C153.011 342.425 193.713 78.6388 260.69 78.6388C301.391 78.6388 332.304 200.228 312.211 235.262"
+        stroke="#B2B0FF"
+        strokeWidth="24"
+        strokeLinecap="round"
+      />
+      <path
+        d="M63.365 90.4885C150.95 116.249 206.593 333.152 132.403 333.152C58.2129 333.152 100.46 69.365 167.437 69.365C234.414 69.365 313.756 333.152 239.566 333.152C165.376 333.152 206.078 69.365 273.055 69.365C313.756 69.365 344.669 190.954 324.576 225.988"
+        stroke="#6360FF"
+        strokeWidth="24"
+        strokeLinecap="round"
+      />
+      <path
+        d="M80.8821 78.1235C168.467 103.884 224.11 320.787 149.92 320.787C75.73 320.787 117.977 57 184.954 57C251.931 57 331.273 320.787 257.083 320.787C182.893 320.787 223.595 57 290.572 57C331.273 57 362.186 178.589 342.093 213.623"
+        stroke="#0500FF"
+        strokeWidth="24"
+        strokeLinecap="round"
+      />
+    </svg>
+  )
+}
+
+export default function About() {
+  //   const currentVersion = chrome.runtime.getManifest().version
+  const currentVersion = "1.0.0"
+  return (
+    <div className="flex flex-col gap-4 pt-12">
+      <div className="flex items-center gap-2">
+        <SpringTabSVG />
+        <div className="flex flex-col">
+          <h1 className="text-4xl font-bold">Spring Tab</h1>
+          <h2 className="-mt-1 text-muted-foreground">Version {currentVersion}</h2>
+        </div>
+      </div>
+    </div>
+  )
+}

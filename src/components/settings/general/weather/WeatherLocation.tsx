@@ -1,24 +1,24 @@
 import { useContext, useState } from "react"
-import { UseAutomaticLocationContext, WeatherLocationContext } from "../../../../context/weather/WeatherProvider"
+import { WeatherLocationContext } from "../../../../context/weather/WeatherProvider"
 import { Switch } from "@/components/ui/switch"
 import { TriangleAlert } from "lucide-react"
 
 export default function WeatherLocation({ gray }: { gray: boolean }) {
   const [error, setError] = useState<null | string>(null)
-  const { useAutomaticLocation, setUseAutomaticLocation } = useContext(UseAutomaticLocationContext)
-  const { setWeatherLocation } = useContext(WeatherLocationContext)
+
+  const { weatherLocation, setWeatherLocation } = useContext(WeatherLocationContext)
 
   const handleCheckLocation = (e: boolean) => {
     if (e) {
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
-            setUseAutomaticLocation(true)
             setError(null)
             setWeatherLocation({
               lat: position.coords.latitude,
               lon: position.coords.longitude,
               name: "Auto",
+              id: "auto",
             })
           },
           (error) => {
@@ -34,7 +34,6 @@ export default function WeatherLocation({ gray }: { gray: boolean }) {
       }
     } else {
       setError(null)
-      setUseAutomaticLocation(false)
     }
   }
 
@@ -45,7 +44,7 @@ export default function WeatherLocation({ gray }: { gray: boolean }) {
           <h2 className="text-lg">Use GPS location</h2>
           <h3 className="text-muted-foreground">Your location is not stored externally</h3>
         </span>
-        <Switch id="autoWeather" checked={useAutomaticLocation} onCheckedChange={handleCheckLocation} />
+        <Switch id="autoWeather" checked={weatherLocation.id} onCheckedChange={handleCheckLocation} />
       </label>
       {error && (
         <span className="-mt-2 flex animate-[fadeScaleIn_.2s_ease-out] items-center gap-2 text-destructive">

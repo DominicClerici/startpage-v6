@@ -13,23 +13,26 @@
 .gearSpin {
   animation: spin 0.75s ease-out;
 }
-.moveLeft[data-state="active"] {
-  animation: tabSlideFromLeft 150ms linear backwards;
+
+.moveUp[data-state="active"] {
+  animation: tabSlideFromTop 150ms linear backwards;
 }
-.moveLeft[data-state="inactive"] {
+.moveUp[data-state="inactive"] {
   top: 0;
-  left: 0;
   position: absolute;
-  width: 100%;
-  animation: tabSlideToLeft 150ms linear forwards;
+  height: 100%;
+  width: calc(100% - 2rem);
+  /* padding-inline: 1rem; */
+  animation: tabSlideToTop 150ms linear forwards;
 }
-.moveRight[data-state="active"] {
-  animation: tabSlideFromRight 150ms linear backwards;
+.moveDown[data-state="active"] {
+  animation: tabSlideFromBottom 150ms linear backwards;
 }
-.moveRight[data-state="inactive"] {
-  top: 0;
-  right: 0;
+.moveDown[data-state="inactive"] {
+  bottom: 0;
   position: absolute;
-  width: 100%;
-  animation: tabSlideToRight 150ms linear forwards;
+  height: 100%;
+  width: calc(100% - 2rem);
+  /* padding-inline: 1rem; */
+  animation: tabSlideToBottom 150ms linear forwards;
 }

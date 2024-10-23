@@ -1,0 +1,5 @@
+So we need:
+import from bookmarks and most visited in history
+custom icons
+proper link validation
+folders/groups

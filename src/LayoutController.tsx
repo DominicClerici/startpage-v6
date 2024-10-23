@@ -8,9 +8,10 @@ import Shortcuts from "./components/shortcuts/Shortcuts"
 import { LifxMain } from "./components/lifx/Lifx"
 import ConnectionWrapper from "./ConnectionWrapper"
 import Todos from "./components/todos/Todos"
-import Weather from "./components/weather/Weather"
 import Timer from "./components/timer/Timer"
 import SpotifyAuthController from "./components/spotify/SpotifyAuthController"
+// import Weather from "./components/weather/Weather"
+import Weather from "./components/newWeather/Weather"
 
 export default function LayoutController() {
   const { layout } = useContext(LayoutContext)
@@ -42,9 +43,10 @@ export default function LayoutController() {
             <ConnectionWrapper fallback={<p>Offline</p>}>
               <SpotifyAuthController />
             </ConnectionWrapper>
-            <ConnectionWrapper fallback={<p>Offline</p>}>
+            {/* <Weather /> */}
+            {/* <ConnectionWrapper fallback={<p>Offline</p>}>
               <Weather />
-            </ConnectionWrapper>
+            </ConnectionWrapper> */}
           </div>
           <MainClock />
           <Greeting />

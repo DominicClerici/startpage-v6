@@ -24,5 +24,8 @@ dist-ssr
 *.sln
 *.sw?
 
+# icons directory
+src/components/iconDir/icons
+
 # repopack-output.txt
 /repopack-output.txt

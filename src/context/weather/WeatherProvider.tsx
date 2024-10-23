@@ -23,25 +23,25 @@ const WeatherIsCelsiusProvider = ({ children }) => {
   )
 }
 
-export const UseAutomaticLocationContext = createContext(null)
-export const useAutomaticLocationDefault = false
-const UseAutomaticLocationProvider = ({ children }) => {
-  const [useAutomaticLocation, setUseAutomaticLocation] = useChromeStorage(
-    "useAutomaticLocation",
-    useAutomaticLocationDefault,
-  )
-
-  return (
-    <UseAutomaticLocationContext.Provider value={{ useAutomaticLocation, setUseAutomaticLocation }}>
-      {children}
-    </UseAutomaticLocationContext.Provider>
-  )
+export type WeatherLocationType = {
+  lat: number
+  lon: number
+  name: string
+  id: number | "auto" | "none"
 }
 
-export const WeatherLocationContext = createContext(null)
-export const weatherLocationDefault = { lat: 0, lon: 0, name: "none" }
+interface WeatherLocationContextType {
+  weatherLocation: WeatherLocationType
+  setWeatherLocation: (location: WeatherLocationType) => void
+}
+
+export const WeatherLocationContext = createContext<WeatherLocationContextType | null>(null)
+export const weatherLocationDefault = { lat: 39.1653, lon: -86.5264, name: "San Francisco, CA", id: 0 }
 const WeatherLocationProvider = ({ children }) => {
-  const [weatherLocation, setWeatherLocation] = useChromeStorage("weatherLocation", weatherLocationDefault)
+  const [weatherLocation, setWeatherLocation] = useChromeStorage<WeatherLocationType>(
+    "weatherLocation",
+    weatherLocationDefault,
+  )
   return (
     <WeatherLocationContext.Provider value={{ weatherLocation, setWeatherLocation }}>
       {children}
@@ -50,7 +50,12 @@ const WeatherLocationProvider = ({ children }) => {
 }
 
 export const WeatherLocationOptions = createContext(null)
-export const weatherLocationOptionsDefault = [{ lat: 37.7749, lon: -122.4194, name: "San Francisco" }]
+export const weatherLocationOptionsDefault = [
+  { lat: 37.7749, lon: -122.4194, name: "San Francisco, CA", id: 0 },
+  { lat: 37.7749, lon: -122.4194, name: "Los Angeles, CA", id: 1 },
+  { lat: 37.7749, lon: -122.4194, name: "Fresno, CA", id: 2 },
+  { lat: 37.7749, lon: -122.4194, name: "Orinda, CA", id: 3 },
+]
 const WeatherLocationOptionsProvider = ({ children }) => {
   const [weatherLocationOptions, setWeatherLocationOptions] = useChromeStorage(
     "weatherLocationOptions",
@@ -68,9 +73,7 @@ export const WeatherProvider = ({ children }) => {
     <WeatherEnabledProvider>
       <WeatherIsCelsiusProvider>
         <WeatherLocationProvider>
-          <WeatherLocationOptionsProvider>
-            <UseAutomaticLocationProvider>{children}</UseAutomaticLocationProvider>
-          </WeatherLocationOptionsProvider>
+          <WeatherLocationOptionsProvider>{children}</WeatherLocationOptionsProvider>
         </WeatherLocationProvider>
       </WeatherIsCelsiusProvider>
     </WeatherEnabledProvider>

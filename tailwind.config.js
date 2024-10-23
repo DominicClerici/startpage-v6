@@ -14,6 +14,7 @@ export default {
     },
     extend: {
       colors: {
+        alert: "hsl(var(--alert))",
         page: "rgb(var(--bg) / <alpha-value>)",
         panel: "rgb(var(--bg-higher) / <alpha-value>)",
         popup: "rgb(var(--bg-highest) / <alpha-value>)",
@@ -62,6 +63,7 @@ export default {
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
+        inter: ["Inter", ...fontFamily.sans],
       },
       keyframes: {
         "accordion-down": {

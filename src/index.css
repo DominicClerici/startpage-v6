@@ -9,6 +9,13 @@
   /* src: url("./fonts/instrument.ttf") format("ttf"); */
   src: url("/fonts/instrument.ttf") format("ttf");
 }
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-display: swap;
+  /* src: url("./fonts/instrument.ttf") format("ttf"); */
+  src: url("/fonts/inter.ttf") format("ttf");
+}
 
 body {
   font-family: "Instrument Sans", sans-serif;
@@ -16,6 +23,7 @@ body {
 
 @layer base {
   :root {
+    --alert: 0 84.2% 60.2%;
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
@@ -44,6 +52,7 @@ body {
   }
 
   .dark {
+    --alert: 0 84.2% 60.2%;
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
     --card: 240 10% 3.9%;
@@ -133,4 +142,7 @@ input[type="number"].hideNumber {
 .customScrollBar::-webkit-scrollbar-thumb {
   background: rgb(var(--surface));
   border-radius: 10px;
+}
+#transitionArea {
+  transition: filter 0.5s;
 }

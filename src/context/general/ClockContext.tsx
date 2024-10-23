@@ -16,10 +16,30 @@ const ShowSecondsProvider = ({ children }) => {
   return <ShowSecondsContext.Provider value={{ showSeconds, setShowSeconds }}>{children}</ShowSecondsContext.Provider>
 }
 
+export const DisplayClockContext = createContext(null)
+const defaultDisplayClock = true
+const DisplayClockProvider = ({ children }) => {
+  const [displayClock, setDisplayClock] = useChromeStorage("displayClock", defaultDisplayClock)
+  return (
+    <DisplayClockContext.Provider value={{ displayClock, setDisplayClock }}>{children}</DisplayClockContext.Provider>
+  )
+}
+
+export const ClockSizeContext = createContext(null)
+const defaultClockSize = "md"
+const ClockSizeProvider = ({ children }) => {
+  const [clockSize, setClockSize] = useChromeStorage("clockSize", defaultClockSize)
+  return <ClockSizeContext.Provider value={{ clockSize, setClockSize }}>{children}</ClockSizeContext.Provider>
+}
+
 export const ClockProvider = ({ children }) => {
   return (
     <Clock24HourProvider>
-      <ShowSecondsProvider>{children}</ShowSecondsProvider>
+      <DisplayClockProvider>
+        <ClockSizeProvider>
+          <ShowSecondsProvider>{children}</ShowSecondsProvider>
+        </ClockSizeProvider>
+      </DisplayClockProvider>
     </Clock24HourProvider>
   )
 }

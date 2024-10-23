@@ -1,5 +1,5 @@
 // WeatherChart.js
-import { useEffect, useMemo, useState } from "react"
+import { useMemo, useState } from "react"
 import { AreaChart, Area, XAxis, Tooltip, YAxis, ReferenceLine } from "recharts"
 import { ArrowUpSVG } from "./Icons"
 import { CustomLabel, CustomTick, CustomTooltip } from "./CustomParts"
